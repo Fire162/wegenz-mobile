@@ -1,0 +1,28 @@
+node_modules/
+.expo/
+dist/
+web-build/
+
+# Native generated builds
+android/
+ios/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Keystores & credentials
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
