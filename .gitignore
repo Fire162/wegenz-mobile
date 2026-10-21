@@ -6,6 +6,8 @@ web-build/
 # Native generated builds
 android/
 ios/
+builds/
+*.apk
 
 # Environment files
 .env
