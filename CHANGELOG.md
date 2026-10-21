@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-10-21 19:38 IST
+
+### Fixed
+* Explicitly hoisted `expo-modules-core` and configured `.npmrc` with `shamefully-hoist=true` to resolve Android autolinking compilation error (`cannot find symbol: import expo.core.ExpoModulesPackage`).
+
 ## [1.0.0] - 2026-10-21 19:20 IST
 
 ### Added

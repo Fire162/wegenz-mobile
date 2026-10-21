@@ -29,6 +29,9 @@ importers:
       expo-linking:
         specifier: ~7.0.4
         version: 7.0.5(d1dbb5e462a63787184e35f309f8c9bb)
+      expo-modules-core:
+        specifier: ~2.2.3
+        version: 2.2.3
       expo-router:
         specifier: ~4.0.16
         version: 4.0.22(4379b7d848a82467b72a8eaddb3e28ae)
