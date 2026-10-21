@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   build-apk:
-    name: Build Android Debug APK
+    name: Build Standalone Android APK
     runs-on: ubuntu-latest
 
     steps:
@@ -57,15 +57,30 @@ jobs:
       - name: ⚙️ Expo Prebuild (Generate Native Android Project)
         run: npx expo prebuild --platform android --clean
 
-      - name: 🔨 Compile Android Debug APK
+      - name: 🔑 Configure Release Signing
+        run: |
+          node -e "
+          const fs = require('fs');
+          const file = 'android/app/build.gradle';
+          let content = fs.readFileSync(file, 'utf8');
+          if (!content.includes('signingConfig signingConfigs.debug\n            minifyEnabled') && !content.includes('signingConfig signingConfigs.debug\r\n            minifyEnabled')) {
+            content = content.replace(/buildTypes\s*\{\s*release\s*\{/g, 'buildTypes {\n        release {\n            signingConfig signingConfigs.debug');
+            fs.writeFileSync(file, content);
+            console.log('Release signing config configured successfully.');
+          } else {
+            console.log('Release signing config already configured.');
+          }
+          "
+
+      - name: 🔨 Compile Standalone Android Release APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          ./gradlew assembleRelease --no-daemon
 
-      - name: 🚀 Upload Debug APK Artifact
+      - name: 🚀 Upload Standalone APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Wegenz-Practice-Debug-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: Wegenz-Practice-Standalone-APK
+          path: android/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
